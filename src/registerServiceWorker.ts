@@ -10,16 +10,16 @@ if (process.env.NODE_ENV === 'production') {
         'For more details, visit https://goo.gl/AFskqB'
       )
     },
-    registered () {
+    registered (registration) {
       console.log('Service worker has been registered.')
     },
-    cached () {
+    cached (registration) {
       console.log('Content has been cached for offline use.')
     },
-    updatefound () {
+    updatefound (registration) {
       console.log('New content is downloading.')
     },
-    updated () {
+    updated (registration) {
       console.log('New content is available; please refresh.')
     },
     offline () {
@@ -28,5 +28,7 @@ if (process.env.NODE_ENV === 'production') {
     error (error) {
       console.error('Error during service worker registration:', error)
     }
+
+
   })
 }
