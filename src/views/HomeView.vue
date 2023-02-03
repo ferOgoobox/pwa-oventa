@@ -1,18 +1,46 @@
+<script setup lang="ts">
+
+  import { ref, onMounted } from 'vue';
+
+  const products = ref([])
+
+
+  const getData = () => {
+    fetch('https://dummyjson.com/products')
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
+    .then(data => {
+      products.value = data.products
+      localStorage.setItem('products', JSON.stringify(data.products))
+      console.log(data);
+    })
+    .catch(error => {
+      console.error('catch',error);
+      if (!navigator.onLine) {
+
+      products.value = JSON.parse(localStorage.getItem("products"))
+      console.log(products);
+      }
+    });
+  }
+</script>
+
 <template>
-  <div class="home">
+   <div class="home">
     <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
   </div>
+  <button @click="getData()">Obtener productos</button>
+  <button @click="products = []">Limpiar</button>
+
+  <ul v-for="product in products" :key="product.id">
+    <li >{{ product.title }}</li>
+  </ul>
+
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
-import HelloWorld from '@/components/HelloWorld.vue'; // @ is an alias to /src
-
-export default defineComponent({
-  name: 'HomeView',
-  components: {
-    HelloWorld,
-  },
-});
-</script>
+<style scoped>
+</style>
