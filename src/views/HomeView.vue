@@ -33,6 +33,7 @@
    <div class="home">
     <img alt="Vue logo" src="../assets/logo.png">
   </div>
+  <h2>OVENTA</h2>
   <button @click="getData()">Obtener productos</button>
   <button @click="products = []">Limpiar</button>
 
